@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Legend } from 'recharts';
 
 export default function HVACUsageChart(props) {
   const data = [...props.data];
@@ -13,8 +13,9 @@ export default function HVACUsageChart(props) {
       barCategoryGap={0}>
       <XAxis dataKey="date"/>
       <YAxis/>
-      <Bar dataKey="air" fill="#8884d8"/>
-      <Bar dataKey="heat" fill="#82ca9d"/>
+      <Legend verticalAlign="top"/>
+      <Bar dataKey="air" fill="blue"/>
+      <Bar dataKey="heat" fill="orange"/>
     </BarChart>
   );
 }
