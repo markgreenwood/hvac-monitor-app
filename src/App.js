@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
 import fan from './fan-blades.png';
 import flame from './blue-flame.png';
-import './App.css';
 import moment from 'moment';
-import { LineChart, Line, BarChart, Bar, XAxis, YAxis } from 'recharts';
+import HrlyTempChart from './HrlyTempChart';
+import HVACUsageChart from './HVACUsageChart';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
@@ -21,9 +21,7 @@ class App extends Component {
     fetch(`http://localhost:3030/api/temperature?start=${startDate}&stop=${stopDate}`)
       .then(res => res.json())
       .then(temps => this.setState({ temperatures: temps, isLoading: false }))
-      .catch(err => {
-        console.log(err);
-      });
+      .catch(err => console.log(err));
   }
 
   componentDidMount() {
@@ -201,24 +199,8 @@ class App extends Component {
         <p className="App-intro">
           Monitor HVAC usage here.
         </p>
-        <LineChart
-          width={800}
-          height={200}
-          data={this.state.temperatures}>
-          <XAxis dataKey="time"/>
-          <YAxis/>
-          <Line dataKey="temperature"/>
-        </LineChart>
-        <BarChart
-          width={800}
-          height={300}
-          data={data}
-          barCategoryGap={1}>
-          <XAxis dataKey="date"/>
-          <YAxis/>
-          <Bar dataKey="air" fill="#8884d8"/>
-          <Bar dataKey="heat" fill="#82ca9d"/>
-        </BarChart>
+        <HrlyTempChart data={this.state.temperatures} />
+        <HVACUsageChart data={data} />
       </div>
     );
   }
