@@ -18,13 +18,13 @@ export default function HrlyTempChart(props) {
   const width = props.width || 800;
   const height = props.height || 300;
   return (
-    <LineChart width={width} height={height} data={data} margin={{top: 20, bottom: 40, left: 50, right: 40}}>
+    <LineChart width={width} height={height} data={data} margin={{top: 40, bottom: 40, left: 50, right: 40}}>
       <XAxis dataKey="date"/>
-      <YAxis domain={['auto', 'auto']}/>
+      <YAxis domain={['auto', 'auto']} label="Degrees F"/>
       <Line dataKey="temperature"/>
-      <CartesianGrid strokeDasharray="3 3" />
-      <ReferenceLine y={75} label="air" stroke="blue" strokeDasharray="3 3" />
-      <ReferenceLine y={62} label="heat" stroke="red" strokeDasharray="3 3" />
+      <CartesianGrid vertical={false} strokeDasharray="3 3" />
+      <ReferenceLine y={75} label="A/C" stroke="#00ABB2" strokeDasharray="3 3" />
+      <ReferenceLine y={62} label="Heat" stroke="#FF6A0A" strokeDasharray="3 3" />
     </LineChart>
   )
 }

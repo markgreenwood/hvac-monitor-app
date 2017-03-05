@@ -5,7 +5,6 @@ import spinner from './spinner.gif';
 import moment from 'moment';
 import HrlyTempChart from './HrlyTempChart';
 import HVACUsageChart from './HVACUsageChart';
-// import usageData from './usage-data';
 import './App.css';
 
 class App extends Component {
@@ -40,8 +39,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.doFetch(moment('7/1/2016').valueOf(), moment('7/31/2016').valueOf());
-    // this.setState({ hvacUsage: [] });
+    this.doFetch(moment('8/1/2016').valueOf(), moment('8/31/2016').valueOf());
   }
 
   render() {

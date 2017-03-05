@@ -13,11 +13,11 @@ export default function HVACUsageChart(props) {
       margin={{top: 20, bottom: 40, left: 50, right: 40}}
       barCategoryGap={0}>
       <XAxis dataKey="date"/>
-      <YAxis/>
+      <YAxis label="Hours per day"/>
       <Legend verticalAlign="top"/>
-      <CartesianGrid strokeDasharray="3 3"/>
-      <Bar dataKey="air" fill="blue"/>
-      <Bar dataKey="heat" fill="orange"/>
+      <CartesianGrid vertical={false} strokeDasharray="3 3"/>
+      <Bar dataKey="air" name="A/C" fill="#00ABB2"/>
+      <Bar dataKey="heat" name="Heat" fill="#FF6A0A"/>
     </BarChart>
   );
 }
