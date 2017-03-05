@@ -5,7 +5,7 @@ import spinner from './spinner.gif';
 import moment from 'moment';
 import HrlyTempChart from './HrlyTempChart';
 import HVACUsageChart from './HVACUsageChart';
-import usageData from './usage-data';
+// import usageData from './usage-data';
 import './App.css';
 
 class App extends Component {
@@ -24,24 +24,24 @@ class App extends Component {
     fetch(`http://localhost:3030/api/temperature?start=${startDate}&stop=${stopDate}`)
       .then(res => res.json())
       .then(values => {
-        this.setState({ temperatures: values.reduce((acc, curr) => acc.concat(curr), []), isLoading: false });
+        this.setState({ temperatures: values.reduce((acc, curr) => acc.concat(curr.tempdata), []), isLoading: false });
         return values;
       })
-      // .then(values => {
-      //   let usageData = values.map(dailyData => dailyData.reduce((acc, curr) => {
-      //     if (curr.temperature > 75) { acc.air++ }
-      //     else if (curr.temperature < 62) { acc.heat++ }
-      //     return acc;
-      //   }, { date: dailyData.date, air: 0, heat: 0 }));
+      .then(values => {
+        let usageData = values.map(dailyData => dailyData.tempdata.reduce((acc, curr) => {
+          if (curr.temperature > 75) { acc.air++ }
+          else if (curr.temperature < 62) { acc.heat++ }
+          return acc;
+        }, { date: dailyData.date, air: 0, heat: 0 }));
 
-      //   this.setState({ hvacUsage: usageData, isLoading: false });
-      // })
+        this.setState({ hvacUsage: usageData, isLoading: false });
+      })
       .catch(err => console.log(err));
   }
 
   componentDidMount() {
-    this.doFetch(moment('6/1/2016').valueOf(), moment('6/30/2016').valueOf());
-    this.setState({ hvacUsage: usageData });
+    this.doFetch(moment('7/1/2016').valueOf(), moment('7/31/2016').valueOf());
+    // this.setState({ hvacUsage: [] });
   }
 
   render() {
@@ -67,7 +67,7 @@ class App extends Component {
         <div className="App-header">
           <img src={fan} className="App-logo App-spinning" alt="fan" />
           <img src={flame} className="App-logo" alt="flame" />
-          <h2>HVAC Monitor</h2>
+          <h2>HVAC Usage Monitor</h2>
         </div>
         <p className="App-intro">
           HVAC usage patterns at PDX (Portland International Airport)
