@@ -5,7 +5,11 @@ import spinner from './spinner.gif';
 import moment from 'moment';
 import HrlyTempChart from './HrlyTempChart';
 import HVACUsageChart from './HVACUsageChart';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import './App.css';
+
+const apiUrl = process.env.APIURL || 'http://localhost:3030/api';
 
 class App extends Component {
   constructor(props) {
@@ -14,16 +18,19 @@ class App extends Component {
       temperatures: [],
       hvacUsage: [],
       isLoading: false,
+      startDate: moment(),
+      endDate: moment(),
     };
   }
 
-  doFetch(startDate, stopDate) {
+  doFetch() {
+    const { startDate, endDate } = this.state;
     this.setState({ isLoading: true });
 
-    fetch(`http://localhost:3030/api/temperature?start=${startDate}&stop=${stopDate}`)
+    fetch(`${apiUrl}/temperature?start=${startDate.valueOf()}&stop=${endDate.valueOf()}`)
       .then(res => res.json())
       .then(values => {
-        this.setState({ temperatures: values.reduce((acc, curr) => acc.concat(curr.tempdata), []), isLoading: false });
+        this.setState({ temperatures: values.reduce((acc, curr) => acc.concat(curr.tempdata), []), isLoading: true });
         return values;
       })
       .then(values => {
@@ -39,7 +46,17 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.doFetch(moment('8/1/2016').valueOf(), moment('8/31/2016').valueOf());
+    this.doFetch();
+  }
+
+  handleStartDate(date) {
+    this.setState({ startDate: date });
+    this.doFetch();
+  }
+
+  handleEndDate(date) {
+    this.setState({ endDate: date });
+    this.doFetch();
   }
 
   render() {
@@ -70,6 +87,8 @@ class App extends Component {
         <p className="App-intro">
           HVAC usage patterns at PDX (Portland International Airport)
         </p>
+        <span>From: </span><DatePicker selected={this.state.startDate} onChange={ (date) => this.handleStartDate(date) }/>
+        <span> To: </span><DatePicker selected={this.state.endDate} onChange={ (date) => this.handleEndDate(date) }/>
         {dataDisplay}
       </div>
     );

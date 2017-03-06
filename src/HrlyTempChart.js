@@ -14,7 +14,7 @@ import { LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid } from 'rec
 // });
 
 export default function HrlyTempChart(props) {
-  const data = [...props.data];
+  const data = [...props.data]; // flatten the data
   const width = props.width || 800;
   const height = props.height || 300;
   return (
