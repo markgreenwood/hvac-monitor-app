@@ -9,25 +9,24 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './App.css';
 
-
 class App extends Component {
   constructor(props) {
     super(props);
+    this.handleStartDate = this.handleStartDate.bind(this);
     this.state = {
       temperatures: [],
       hvacUsage: [],
       isLoading: false,
-      startDate: moment(),
-      endDate: moment(),
+      startDate: moment('6/1/2016'),
+      endDate: moment('6/1/2016').add(29,'days'),
     };
   }
 
   doFetch() {
-    const apiUrl = process.env.APIURL || 'http://localhost:3030/api';
     const { startDate, endDate } = this.state;
     this.setState({ isLoading: true });
 
-    fetch(`${apiUrl}/temperature?start=${startDate.valueOf()}&stop=${endDate.valueOf()}`)
+    fetch(`/api/temperature?start=${startDate.valueOf()}&stop=${endDate.valueOf()}`)
       .then(res => res.json())
       .then(values => {
         this.setState({ temperatures: values.reduce((acc, curr) => acc.concat(curr.tempdata), []), isLoading: true });
@@ -50,13 +49,9 @@ class App extends Component {
   }
 
   handleStartDate(date) {
-    this.setState({ startDate: date });
-    this.doFetch();
-  }
-
-  handleEndDate(date) {
-    this.setState({ endDate: date });
-    this.doFetch();
+    const start = date.clone();
+    const end = start.clone().add(29, 'days');
+    this.setState({ startDate: date, endDate: end }, () => this.doFetch());
   }
 
   render() {
@@ -87,8 +82,7 @@ class App extends Component {
         <p className="App-intro">
           HVAC usage patterns at PDX (Portland International Airport)
         </p>
-        <span>From: </span><DatePicker selected={this.state.startDate} onChange={ (date) => this.handleStartDate(date) }/>
-        <span> To: </span><DatePicker selected={this.state.endDate} onChange={ (date) => this.handleEndDate(date) }/>
+        <span>30-day span from: </span><DatePicker selected={this.state.startDate} onChange={ this.handleStartDate }/>
         {dataDisplay}
       </div>
     );
