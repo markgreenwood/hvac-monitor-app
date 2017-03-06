@@ -67,8 +67,12 @@ class App extends Component {
     } else {
       dataDisplay = (
         <div>
-          <HrlyTempChart data={this.state.temperatures} />
+          <hr/>
+          <p className="graph-title">HVAC System Usage</p>
           <HVACUsageChart data={this.state.hvacUsage} />
+          <hr/>
+          <p className="graph-title">Hourly Temperature</p>
+          <HrlyTempChart data={this.state.temperatures} />
         </div>
       );
     }

@@ -17,7 +17,7 @@ const CustomizedAxisTick = React.createClass({
 export default function HrlyTempChart(props) {
   const data = [...props.data]; // flatten the data
   const width = props.width || 800;
-  const height = props.height || 300;
+  const height = props.height || 250;
   return (
     <LineChart width={width} height={height} data={data} margin={{top: 40, bottom: 50, left: 50, right: 40}}>
       <XAxis dataKey="time" tick={<CustomizedAxisTick/>}/>
