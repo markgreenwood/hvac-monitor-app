@@ -11,7 +11,7 @@ export default function HVACUsageChart(props) {
       height={height}
       data={data}
       margin={{top: 20, bottom: 40, left: 50, right: 40}}
-      barCategoryGap={0}>
+      barGap={0}>
       <XAxis dataKey="date"/>
       <YAxis label="Hrs/day" domain={[ 0, 24 ]}/>
       <Legend verticalAlign="top" layout="horizontal"/>

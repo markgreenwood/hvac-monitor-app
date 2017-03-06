@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import fan from './fan-blades.png';
-import flame from './blue-flame.png';
-import spinner from './spinner.gif';
+import fan from './images/fan-blades.png';
+import flame from './images/blue-flame.png';
+import spinner from './images/spinner.gif';
+import poweredby from './images/poweredby-oneline-darkbackground.png';
 import moment from 'moment';
 import HrlyTempChart from './HrlyTempChart';
 import HVACUsageChart from './HVACUsageChart';
@@ -75,9 +76,14 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header">
-          <img src={fan} className="App-logo App-spinning" alt="fan" />
-          <img src={flame} className="App-logo" alt="flame" />
-          <h2>HVAC Usage Monitor</h2>
+          <div className="App-header-logos">
+            <img src={fan} className="App-logo App-spinning" alt="fan" />
+            <img src={flame} className="App-logo" alt="flame" />
+          </div>
+          <div className="App-header-bannertext">
+            <h2>HVAC Usage Monitor</h2>
+            <img src={poweredby} className="App-poweredby" alt="powered by DarkSky" />
+          </div>
         </div>
         <p className="App-intro">
           HVAC usage patterns at PDX (Portland International Airport)

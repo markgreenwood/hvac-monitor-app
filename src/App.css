@@ -4,7 +4,12 @@
 
 .App-logo {
   height: 60px;
-  padding: 0px 10px;
+  padding: 10px;
+}
+
+.App-poweredby {
+  height: 40px;
+  padding: 5px;
 }
 
 .App-spinning {
@@ -14,12 +19,24 @@
 .App-header {
   background-color: #254;
   height: 100px;
-  padding: 20px;
-  color: white;
+  padding: 10px;
+  color: white; 
+}
+
+.App-header-logos {
+  float: right;
+}
+
+.App-header-bannertext {
+  float: left;
+}
+
+.App-header h2 {
+  margin: 5px;
 }
 
 .App-intro {
-  font-size: large;
+  font-size: medium;
 }
 
 @keyframes App-item-spin {
