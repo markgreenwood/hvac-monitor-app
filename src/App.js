@@ -51,7 +51,7 @@ class App extends Component {
   handleStartDate(date) {
     const start = date.clone();
     const end = start.clone().add(29, 'days');
-    this.setState({ startDate: date, endDate: end }, () => this.doFetch());
+    this.setState({ startDate: start, endDate: end }, () => this.doFetch());
   }
 
   render() {
