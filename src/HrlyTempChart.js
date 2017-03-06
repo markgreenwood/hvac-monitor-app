@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import moment from 'moment';
 import { LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip } from 'recharts';
 
@@ -30,3 +30,9 @@ export default function HrlyTempChart(props) {
     </LineChart>
   )
 }
+
+HrlyTempChart.propTypes = {
+  data: PropTypes.array.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
+};

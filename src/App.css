@@ -1,3 +1,9 @@
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .App {
   text-align: center;
 }
@@ -18,7 +24,7 @@
 
 .App-header {
   background-color: #19915E;
-  height: 100px;
+  /*height: 120px;*/
   padding: 10px;
   color: white; 
 }
@@ -29,6 +35,17 @@
 
 .App-header-bannertext {
   float: left;
+}
+
+.App-header-developer {
+  font-size: small;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.App-header a, a:link, a:active {
+  text-decoration: none;
+  color: white;
 }
 
 .App-header h2 {

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropTypes } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Legend, CartesianGrid, Tooltip } from 'recharts';
 
 const CustomizedAxisTick = React.createClass({
@@ -33,4 +33,10 @@ export default function HVACUsageChart(props) {
       <Bar dataKey="heat" name="Heat" fill="#FF6A0A"/>
     </BarChart>
   );
+}
+
+HVACUsageChart.propTypes = {
+  data: PropTypes.array.isRequired,
+  width: PropTypes.number,
+  height: PropTypes.number,
 }
