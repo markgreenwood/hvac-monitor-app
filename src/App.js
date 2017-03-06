@@ -9,7 +9,6 @@ import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import './App.css';
 
-const apiUrl = process.env.APIURL || 'http://localhost:3030/api';
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +23,7 @@ class App extends Component {
   }
 
   doFetch() {
+    const apiUrl = process.env.APIURL || 'http://localhost:3030/api';
     const { startDate, endDate } = this.state;
     this.setState({ isLoading: true });
 
