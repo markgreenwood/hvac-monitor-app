@@ -1,5 +1,5 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, Legend, CartesianGrid } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, Legend, CartesianGrid, Tooltip } from 'recharts';
 
 export default function HVACUsageChart(props) {
   const data = [...props.data];
@@ -13,9 +13,10 @@ export default function HVACUsageChart(props) {
       margin={{top: 20, bottom: 40, left: 50, right: 40}}
       barCategoryGap={0}>
       <XAxis dataKey="date"/>
-      <YAxis label="Hours per day"/>
-      <Legend verticalAlign="top"/>
+      <YAxis label="Hrs/day" domain={[ 0, 24 ]}/>
+      <Legend verticalAlign="top" layout="horizontal"/>
       <CartesianGrid vertical={false} strokeDasharray="3 3"/>
+      <Tooltip/>
       <Bar dataKey="air" name="A/C" fill="#00ABB2"/>
       <Bar dataKey="heat" name="Heat" fill="#FF6A0A"/>
     </BarChart>

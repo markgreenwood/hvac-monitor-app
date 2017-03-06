@@ -1,5 +1,5 @@
 {
-  "name": "ce-hvac-app",
+  "name": "hvac-monitor-app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
