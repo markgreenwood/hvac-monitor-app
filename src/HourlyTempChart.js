@@ -1,18 +1,30 @@
-import React, { PropTypes } from 'react';
-import moment from 'moment';
+import React, { Component, PropTypes } from 'react';
+import CustomizedAxisTick from './CustomizedAxisTick';
 import { LineChart, Line, XAxis, YAxis, ReferenceLine, CartesianGrid, Tooltip } from 'recharts';
+import './HourlyTempChart.css';
+import moment from 'moment';
 
-const CustomizedAxisTick = React.createClass({
-  render () {
-    const {x, y, stroke, payload} = this.props;
-		
-   	return (
-    	<g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-40)">{moment(payload.value).format('MM/DD/YYYY')}</text>
-      </g>
-    );
+class HourlyTemperatureCursor extends Component {
+  constructor(props) {
+    super(props);
   }
-});
+
+  render() {
+    const { active } = this.props;
+
+    if (active) {
+      const { payload, label } = this.props;
+      return (
+        <div className="hourly-temperature-cursor">
+          <p className="label">{`Time: ${moment(new Date(label)).format('MM/DD/YY h:mm a')}`}</p>
+          <p className="value">{`Temperature: ${payload[0].value} F`}</p>
+        </div>
+      );
+    }
+
+    return null;
+  }
+}
 
 export default function HourlyTempChart(props) {
   const data = [...props.data]; // flatten the data
@@ -23,7 +35,7 @@ export default function HourlyTempChart(props) {
       <XAxis dataKey="time" tick={<CustomizedAxisTick/>}/>
       <YAxis domain={['auto', 'auto']} label="Degrees F"/>
       <Line dataKey="temperature"/>
-      <Tooltip/>
+      <Tooltip content={<HourlyTemperatureCursor/>}/>
       <CartesianGrid vertical={false} strokeDasharray="3 3" />
       <ReferenceLine y={75} label="A/C" stroke="#00ABB2" strokeDasharray="3 3" />
       <ReferenceLine y={62} label="Heat" stroke="#FF6A0A" strokeDasharray="3 3" />

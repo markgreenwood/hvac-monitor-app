@@ -1,17 +1,6 @@
 import React, { PropTypes } from 'react';
 import { BarChart, Bar, XAxis, YAxis, Legend, CartesianGrid, Tooltip } from 'recharts';
-
-const CustomizedAxisTick = React.createClass({
-  render () {
-    const {x, y, stroke, payload} = this.props;
-		
-   	return (
-    	<g transform={`translate(${x},${y})`}>
-        <text x={0} y={0} dy={16} textAnchor="end" fill="#666" transform="rotate(-40)">{payload.value}</text>
-      </g>
-    );
-  }
-});
+import CustomizedAxisTick from './CustomizedAxisTick';
 
 export default function HVACUsageChart(props) {
   const data = [...props.data];
