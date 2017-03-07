@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import fan from './images/fan-blades.png';
-import flame from './images/blue-flame.png';
 import spinner from './images/spinner.gif';
-import poweredby from './images/poweredby-oneline-darkbackground.png';
 import moment from 'moment';
-import HrlyTempChart from './HrlyTempChart';
+import HourlyTempChart from './HourlyTempChart';
 import HVACUsageChart from './HVACUsageChart';
 import DatePicker from 'react-datepicker';
+import AppHeader from './AppHeader';
 import 'react-datepicker/dist/react-datepicker.css';
 import './App.css';
 
@@ -72,26 +70,14 @@ class App extends Component {
           <HVACUsageChart data={this.state.hvacUsage} />
           <hr/>
           <p className="graph-title">Hourly Temperature</p>
-          <HrlyTempChart data={this.state.temperatures} />
+          <HourlyTempChart data={this.state.temperatures} />
         </div>
       );
     }
 
     return (
       <div className="App">
-        <div className="App-header clearfix">
-          <div className="App-header-logos">
-            <img src={fan} className="App-logo App-spinning" alt="fan" />
-            <img src={flame} className="App-logo" alt="flame" />
-          </div>
-          <div className="App-header-bannertext">
-            <h2>HVAC Usage Monitor</h2>
-            <a href="http://darksky.net/poweredby" target="_blank">
-            <img src={poweredby} className="App-poweredby" alt="powered by DarkSky" />
-            </a>
-            <p className="App-header-developer">Developed by <a href="http://markjgreenwood.com" target="_blank">Mark Greenwood</a></p>
-          </div>
-        </div>
+        <AppHeader/>
         <p className="App-intro">
           HVAC usage patterns at PDX (Portland International Airport)
         </p>
@@ -101,5 +87,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;

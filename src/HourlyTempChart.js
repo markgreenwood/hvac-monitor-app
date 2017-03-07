@@ -14,7 +14,7 @@ const CustomizedAxisTick = React.createClass({
   }
 });
 
-export default function HrlyTempChart(props) {
+export default function HourlyTempChart(props) {
   const data = [...props.data]; // flatten the data
   const width = props.width || 800;
   const height = props.height || 250;
@@ -31,7 +31,7 @@ export default function HrlyTempChart(props) {
   )
 }
 
-HrlyTempChart.propTypes = {
+HourlyTempChart.propTypes = {
   data: PropTypes.array.isRequired,
   width: PropTypes.number,
   height: PropTypes.number,
