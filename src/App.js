@@ -18,8 +18,8 @@ class App extends Component {
       temperatures: [],
       hvacUsage: [],
       isLoading: false,
-      startDate: moment('6/1/2016'),
-      endDate: moment('6/1/2016').add(29,'days'),
+      startDate: moment(new Date('6/1/2016')),
+      endDate: moment(new Date('6/1/2016')).add(29,'days'),
     };
   }
 
@@ -27,7 +27,7 @@ class App extends Component {
     const { startDate, endDate } = this.state;
     this.setState({ isLoading: true });
 
-    fetch(`/api/temperature?start=${startDate.valueOf()}&stop=${endDate.valueOf()}`)
+    fetch(`/api/temperature?start=${startDate.valueOf()}&end=${endDate.valueOf()}`)
       .then(res => res.json())
       .then(values => {
         this.setState({ temperatures: values.reduce((acc, curr) => acc.concat(curr.tempdata), []), isLoading: true });
